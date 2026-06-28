@@ -53,23 +53,29 @@ def report_test_result(row_num, tc_id, priority, pre_condition, test_steps, expe
     print(f"🔄 [{tc_id}] 테스트 결과를 누적 저장 중...")
 
     # ----------------------------------------
-    # 1. 구글 스프레드시트 업데이트 (빈 행 찾아 누적)
+    # 1. 구글 스프레드시트 업데이트 (append_row로 맨 아래 자동 누적)
     # ----------------------------------------
     if 'sheet' in globals():
         try:
-            existing_rows = len(sheet.col_values(1))
-            target_row = existing_rows + 1
+            # 1번째 열(A열)부터 10번째 열(J열)까지 들어갈 데이터를 한 줄 리스트로 정의합니다.
+            # 데이터가 들어가지 않는 D열(4) ~ H열(8)은 빈 문자열("")로 자리를 채워줍니다.
+            row_data = [
+                tc_id,                                         # A열 (1번)
+                "인스타 앱 진입 후 새로고침 기능이 동작하는가",  # B열 (2번)
+                expected_result,                               # C열 (3번)
+                "",                                            # D열 (4번) - 빈칸
+                "",                                            # E열 (5번) - 빈칸
+                "",                                            # F열 (6번) - 빈칸
+                "",                                            # G열 (7번) - 빈칸
+                "",                                            # H열 (8번) - 빈칸
+                result,                                        # I열 (9번)
+                f"[{result}] {current_time}"                   # J열 (10번)
+            ]
 
-            if target_row < 6:
-                target_row = 6
+            # append_row 함수가 시트의 맨 마지막 데이터 아래에 자동으로 한 줄을 추가해 줍니다.
+            sheet.append_row(row_data)
 
-            sheet.update_cell(target_row, 1, tc_id)
-            sheet.update_cell(target_row, 2, "인스타 앱 진입 후 새로고침 기능이 동작하는가")
-            sheet.update_cell(target_row, 3, expected_result)
-            sheet.update_cell(target_row, 9, result)
-            sheet.update_cell(target_row, 10, f"[{result}] {current_time}")
-
-            print(f"🟢 구글 시트 -> 새 빈 줄인 [{target_row}행]에 결과 누적 성공!")
+            print(f"🟢 구글 시트 -> 맨 아래 행에 데이터 누적 성공!")
         except Exception as e:
             print(f"🔴 구글 시트 입력 에러: {e}")
     else:
