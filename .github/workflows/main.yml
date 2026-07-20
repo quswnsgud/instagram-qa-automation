@@ -30,9 +30,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest selenium python-dotenv Appium-Python-Client
 
-      # 단계 4: 파이턴 코드를 실행하여 인스타그램 로그인 테스트를 돌립니다.
+      # 단계 4: 파이썬 코드를 실행하여 인스타그램 로그인 테스트를 돌립니다.
       - name: Run Instagram Test
-        env:
-          PYTHONPATH: ${{ github.workspace }}
         run: |
-          pytest tests/
+          python -m pytest tests/
