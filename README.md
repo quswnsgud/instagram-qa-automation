@@ -11,6 +11,7 @@
 - **Framework**: Pytest
 - **Libraries**: Selenium
 - **Integrations**: Notion API, Google Sheets API (via custom reporter)
+- **CI/CD**: GitHub Actions
 - **Security**: Dotenv (`.env`)
 - **Version Control**: Git, GitHub
 
@@ -30,6 +31,9 @@
 - 환경 변수(`.env`)로 안전하게 관리되는 자격 증명(Notion Token, Google API Key)을 활용합니다.
 - 테스트 완료 후 `report_test_result` 모듈을 통해 **테스트 케이스 ID, 중요도, 수행 단계, 예상 결과, 그리고 성공/실패 여부(PASS/FAIL)를 노션 데이터베이스 및 구글 스프레드시트에 실시간으로 업데이트**합니다.
 
+### 4. GitHub Actions를 통한 CI 기반 자동화 (작업 중 ⚙️)
+- `feature/cicd` 브랜치에 코드가 푸시될 때마다 GitHub의 가상 우분투 환경에서 파이썬 및 의존성 라이브러리가 자동으로 빌드되도록 파이프라인(`main.yml`)을 구축하고 있습니다.
+
 <br>
 
 ## 📋 포함된 테스트 시나리오
@@ -43,6 +47,9 @@
 
 ## 📁 Project Structure
 ```text
+├── .github/
+│   └── workflows/
+│       └── main.yml  # GitHub Actions CI 설정 파일 (새로 추가! ✨)
 ├── config/          # 환경 설정 및 결과 리포터 관리 (reporter.py 등)
 ├── pages/           # 웹 페이지 객체 (요소 및 액션 정의 - login_page.py 등)
 ├── tests/           # 실제 자동화 테스트 시나리오 (test_instagram_flow.py 등)
