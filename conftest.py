@@ -1,4 +1,4 @@
-# conftest.py
+import os
 import pytest
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
@@ -24,6 +24,10 @@ from appium.options.android import UiAutomator2Options
 # =====================================================================
 @pytest.fixture(scope="function")
 def driver():
+    # 📍 깃허브 액션 환경(CI)인지 확인하여 가상 서버 환경이면 테스트를 건너뜁니다.
+    if os.getenv("CI") == "true":
+        pytest.skip("깃허브 액션 환경에서는 Appium 서버 연결을 건너뜁니다.")
+
     options = UiAutomator2Options()
     options.platform_name = 'Android'
     options.automation_name = 'UiAutomator2'
