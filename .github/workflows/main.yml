@@ -13,6 +13,11 @@ jobs:
     # 깃허브가 제공하는 가상 컴퓨터의 운영체제(OS)를 우분투(리눅스) 최신 버전으로 선택합니다.
     runs-on: ubuntu-latest
 
+    # 💡 [추가] 모든 명령어(run)를 instagram-qa-automation 폴더 안으로 이동해서 실행하도록 설정합니다.
+    defaults:
+      run:
+        working-directory: instagram-qa-automation
+
     steps:
       # 단계 1: 깃허브 저장소에 있는 우리 코드를 가상 컴퓨터로 복사해 옵니다.
       - name: Checkout code
