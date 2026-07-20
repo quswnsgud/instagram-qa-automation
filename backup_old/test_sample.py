@@ -91,7 +91,7 @@ def test_instagram_logo_check():
         actual_status = "FAIL"
 
         # 📸 [핵심] 실패한 순간 핸드폰 화면을 그대로 캡처해서 저장합니다!
-        os.makedirs("screenshots", exist_ok=True)
+        os.makedirs("../screenshots", exist_ok=True)
         screenshot_path = f"screenshots/{my_tc_id}_failed.png"
         driver.save_screenshot(screenshot_path)
         print(f"📸 [시스템] 테스트 실패로 인해 실제 핸드폰 화면 캡처 완료! -> {screenshot_path}")

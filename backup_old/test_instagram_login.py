@@ -105,7 +105,7 @@ def test_instagram_login_process():
 
     except Exception as e:
         actual_status = "FAIL"
-        os.makedirs("screenshots", exist_ok=True)
+        os.makedirs("../screenshots", exist_ok=True)
         driver.save_screenshot(f"screenshots/{my_tc_id}_failed.png")
         print(f"📸 [시스템] 테스트 실패 스크린샷 저장 완료")
         raise e
